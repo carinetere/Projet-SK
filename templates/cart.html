@@ -1,0 +1,295 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from themesdesign.in/sozia-django-flask/layouts/cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 16 Feb 2025 12:59:52 GMT -->
+<head>
+    <meta charset="UTF-8" />
+    <title>Sozia - Responsive Minimal Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Premium Bootstrap 5 Landing Page Template" />
+    <meta name="keywords" content="bootstrap 5, premium, marketing, multipurpose" />
+    <meta name="author" content="Themesdesign" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="images/favicon.ico" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/materialdesignicons.min.css' %}" />
+    <!-- Pe 7 icon Css-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/pe-icon-7-stroke.css' %}" />
+
+    <!-- custom Css -->
+    <link rel="stylesheet" id="app-css" type="text/css" href="{% static 'css/pe-icon-7-stroke.css' %}" />
+
+    <!-- colors -->
+    <link href="{% static 'css/colors/default.css' %}" rel="stylesheet" type="text/css" id="color-opt" />
+</head>
+
+<body data-bs-target=".navbar" data-bs-offset="110">
+    <!-- light-dark mode button -->
+    <a href="javascript: void(0);" id="mode" data-class="light" class="text-white rounded-end mode-btn"
+        onclick="changeMode(event)">
+        <i class="mode-dark mx-auto" data-feather="moon"></i>
+        <i class="bx-spin mode-light" data-feather="sun"></i>
+    </a>
+    <!-- Start Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top sticky mx-auto" id="navbar">
+        <div class="container">
+            <a href="{% url "index" %}" class="navbar-brand me-4">
+                <img src="{% static 'images/logo-light.png' %}" class="logo-light" alt="" height="22" />
+                <img src="{% static 'images/logo-dark.png' %}" class="logo-dark" alt="" height="22" />
+            </a>
+
+            <div class="navbar-header">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbar-collapse-1" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="mdi mdi-menu"></span>
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                <ul class="nav navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link sub-menu-item" href="{% url "index" %}">Acceuil</a></li>
+                    <li class="nav-item"><a class="nav-link sub-menu-item" href="{% url "about" %}">A propos</a></li>
+                    <li class="nav-item"><a class="nav-link sub-menu-item" href="{% url "services" %}">Services</a></li>
+                    <li class="nav-item dropdown parent-menu-item">
+                        <a class="nav-link menu-item dropdown-toggle" data-bs-toggle="dropdown"
+                            href="javascript:void(0)" role="button" aria-expanded="false">Shop</a>
+                        <ul class="dropdown-menu border-0">
+                            <li class="nav-item">
+                                <a class="nav-link sub-menu-item" href="{% url "products" %}">Produits</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link sub-menu-item" href="{% url "product-list" %}">Liste produit</a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link sub-menu-item" href="{% url "cart" %}">Panier</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link sub-menu-item" href="{% url "checkout" %}">Paiement</a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown parent-menu-item">
+                        <a class="nav-link menu-item dropdown-toggle" data-bs-toggle="dropdown"
+                            href="javascript:void(0)" role="button" aria-expanded="false">Portfolio</a>
+                        <ul class="dropdown-menu border-0">
+                            <li class="nav-item">
+                                <a class="nav-link sub-menu-item" href="{% url "work" %}">Work</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link sub-menu-item" href="{% url "work-detail" %}">Work Detail</a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link sub-menu-item" href="{% url "contact" %}">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- END NAVBAR -->
+
+
+    <!-- Start Title -->
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="page-title">
+                        <h2 class="text-dark fw-light lh-base mt-5">Votre Panier <span
+                                class="fw-medium title">Panier</span> Maintenant</h2>
+                        <p class="fs-16 text-muted mb-0"></p>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </section>
+    <!-- End Title -->
+
+    <section class="sm-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="table-responsive mt-4">
+                        <table class="table caption-top table-borderless pro-table">
+                            <thead class="bg-light text-dark">
+                                <tr>
+                                    <th scope="col" class="fw-semibold mt-2">Produits</th>
+                                    <th scope="col" class="fw-semibold mt-2">Prix</th>
+                                    <th scope="col" class="fw-semibold mt-2">Réduction</th>
+                                    <th scope="col" class="fw-semibold mt-2">Quantité</th>
+                                    <th scope="col" class="fw-semibold mt-2">Retirer</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in cart_items %}
+                                    <tr class="align-middle">
+                                        <th scope="row">
+                                            <img class="img-fluid rounded" src="{{ item.product_cartitem.image.url }}" width="125" alt="" />
+                                        </th>
+                                        <td>
+                                            <h5 class="fs-16 fw-medium">{{ item.product_cartitem.name }}</h5>
+                                            <div class="price d-inline-block">
+                                                <ins class="text-dark pe-1 fs-15 fw-semibold text-decoration-none">${{ item.product_cartitem.price_product }}</ins>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <span class="badge bg-soft-primary text-primary rounded-3 fs-14 fw-bold py-2">-10%</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <select class="form-select border" id="autoSizingSelect">
+                                                <option value="1" {% if item.quantity_cartitem == 1 %}selected{% endif %}>1</option>
+                                                <option value="2" {% if item.quantity_cartitem == 2 %}selected{% endif %}>2</option>
+                                                <option value="3" {% if item.quantity_cartitem == 3 %}selected{% endif %}>3</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <a href="{% url "remove_from_cart" item.id %}" class="text-dark fw-semibold">Retirer <span class="mx-3">|</span> Ajouter à la liste de souhaits</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+    
+                    <div class="row border-top">
+                        <div class="col-lg-6 mt-4">
+                            <div class="mb-3 row g-2 align-items-center">
+                                <label for="inputCode" class="col-sm-3 col-3 col-form-label text-uppercase text-dark fw-semibold"><i class="mdi mdi-tag-multiple fs-18 text-dark align-middle"></i> Ajouter un coupon</label>
+                                <div class="col-sm-6 col-5">
+                                    <input type="text" class="form-control bg-light border" id="inputCode" />
+                                </div>
+                                <div class="col-sm-3 col-4">
+                                    <a href="javascript:void(0)" class="btn btn-secondary">Valider <i class="icon-xs" data-feather="arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 offset-lg-2 mt-4">
+                            <div>
+                                <ul class="list-unstyled list-inline border-bottom py-3 mb-0">
+                                    <li class="list-inline-item">
+                                        <h5 class="fs-15 mb-0 fw-semibold">Prix :</h5>
+                                    </li>
+                                    <li class="list-inline-item float-end text-dark">${{ total_price }}</li>
+                                </ul>
+                                <ul class="list-unstyled list-inline border-bottom py-3 mb-0">
+                                    <li class="list-inline-item">
+                                        <h5 class="fs-15 mb-0 fw-semibold">Livraison :</h5>
+                                    </li>
+                                    <li class="list-inline-item float-end text-dark text-primary">Gratuit</li>
+                                </ul>
+                                <ul class="list-unstyled list-inline border-bottom py-3 mb-0">
+                                    <li class="list-inline-item">
+                                        <h5 class="fs-15 mb-0 fw-semibold">Réduction :</h5>
+                                    </li>
+                                    <li class="list-inline-item float-end text-dark">${{ discount_price }}</li>
+                                </ul>
+                                <ul class="list-unstyled list-inline py-3 mb-0">
+                                    <li class="list-inline-item">
+                                        <h5 class="fs-16 mb-0 fw-semibold">Total :</h5>
+                                    </li>
+                                    <li class="list-inline-item fs-16 fw-semibold text-dark float-end">${{ final_price }}</li>
+                                </ul>
+                                <a href="{% url 'checkout' %}" class="btn btn-primary mt-3 float-end">Passer au paiement <i class="icon-xs icon" data-feather="arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>        
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="text-center">
+                        <a href="{% url "index" %}" class="footer-logo d-inline-block py-4">
+                            <img src="{% static 'images/logo-light.png' %}" class="mx-auto logo-dark" alt="" height="24" />
+                        </a>
+
+                        <ul class="list-inline social-circle mt-3">
+                            <li class="list-inline-item"><a href="javascript:void(0)"> <i class="mdi mdi-facebook"></i>
+                                </a></li>
+                            <li class="list-inline-item"><a href="javascript:void(0)"> <i class="mdi mdi-twitter"></i>
+                                </a></li>
+                            <li class="list-inline-item"><a href="javascript:void(0)"> <i
+                                        class="mdi mdi-google-plus"></i> </a></li>
+                            <li class="list-inline-item"><a href="javascript:void(0)"> <i class="mdi mdi-apple"></i>
+                                </a></li>
+                            <li class="list-inline-item"><a href="javascript:void(0)"> <i class="mdi mdi-instagram"></i>
+                                </a></li>
+                        </ul>
+
+                        <div class="text-white-50 pb-4">
+                            <script>document.write(new Date().getFullYear())</script> &copy; Sozia by <a
+                                class="text-white-50 text-decoration-underline" target="_blank"
+                                href="https://themesdesign.in/">Themesdesign</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+        </div>
+    </footer>
+    <!-- END FOOTER -->
+
+    <!-- Style switcher -->
+    <div id="style-switcher" onclick="toggleSwitcher()">
+        <div>
+            <h3>Select Your Color</h3>
+            <ul class="pattern">
+                <li>
+                    <a class="color1" href="javascript: void(0);" onclick="setColor('default')"></a>
+                </li>
+                <li>
+                    <a class="color2" href="javascript: void(0);" onclick="setColor('success')"></a>
+                </li>
+                <li>
+                    <a class="color3" href="javascript: void(0);" onclick="setColor('warning')"></a>
+                </li>
+                <li>
+                    <a class="color4" href="javascript: void(0);" onclick="setColor('danger')"></a>
+                </li>
+                <li>
+                    <a class="color5" href="javascript: void(0);" onclick="setColor('info')"></a>
+                </li>
+                <li>
+                    <a class="color6" href="javascript: void(0);" onclick="setColor('amber')"></a>
+                </li>
+            </ul>
+        </div>
+        <div class="bottom">
+            <a href="javascript: void(0);" class="settings rounded-end text-light"><i data-feather="droplet"></i></a>
+        </div>
+    </div>
+    <!-- end Style switcher -->
+
+    <!-- Javascript -->
+    <script src="{% static 'images/products/pro-6.jpg' %}"></script>
+
+    <!-- feather icon -->
+    <script src="{% static 'js/feather.js' %}"></script>
+
+    <!-- app js -->
+    <script src="{% static 'js/app.js' %}"></script>
+</body>
+
+
+<!-- Mirrored from themesdesign.in/sozia-django-flask/layouts/cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 16 Feb 2025 12:59:52 GMT -->
+</html>

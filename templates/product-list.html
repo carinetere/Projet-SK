@@ -1,0 +1,507 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from themesdesign.in/sozia-django-flask/layouts/product-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 16 Feb 2025 12:59:50 GMT -->
+<head>
+    <meta charset="UTF-8" />
+    <title>Sozia - Responsive Minimal Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Premium Bootstrap 5 Landing Page Template" />
+    <meta name="keywords" content="bootstrap 5, premium, marketing, multipurpose" />
+    <meta name="author" content="Themesdesign" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/materialdesignicons.min.css' %}" />
+    <!-- Pe 7 icon Css-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/pe-icon-7-stroke.css' %}" />
+
+    <!-- custom Css -->
+    <link rel="stylesheet" id="app-css" type="text/css" href="{% static 'css/style.css' %}" />
+
+    <!-- colors -->
+    <link href="{% static 'css/colors/default.css' %}" rel="stylesheet" type="text/css" id="color-opt" />
+</head>
+
+<body data-bs-target=".navbar" data-bs-offset="110">
+    <!-- light-dark mode button -->
+    <a href="javascript: void(0);" id="mode" data-class="light" class="text-white rounded-end mode-btn"
+        onclick="changeMode(event)">
+        <i class="mode-dark mx-auto" data-feather="moon"></i>
+        <i class="bx-spin mode-light" data-feather="sun"></i>
+    </a>
+    <!-- Start Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top sticky mx-auto" id="navbar">
+        <div class="container">
+            <a href="{% url "index" %}" class="navbar-brand me-4">
+                <img src="{% static 'images/logo-light.png' %}" class="logo-light" alt="" height="22" />
+                <img src="{% static 'images/logo-dark.png' %}" class="logo-dark" alt="" height="22" />
+            </a>
+
+            <div class="navbar-header">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbar-collapse-1" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="mdi mdi-menu"></span>
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                <ul class="nav navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link sub-menu-item" href="{% url "index" %}">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link sub-menu-item" href="{% url "about" %}">A propos</a></li>
+                    <li class="nav-item"><a class="nav-link sub-menu-item" href="{% url "services" %}">Services</a></li>
+                    <li class="nav-item dropdown parent-menu-item">
+                        <a class="nav-link menu-item dropdown-toggle" data-bs-toggle="dropdown"
+                            href="javascript:void(0)" role="button" aria-expanded="false">Boutique</a>
+                        <ul class="dropdown-menu border-0">
+                            <li class="nav-item">
+                                <a class="nav-link sub-menu-item" href="{% url "products" %}">Produits</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link sub-menu-item" href="{% url "product-list" %}">Liste de produits</a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link sub-menu-item" href="{% url "cart" %}">Panier</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link sub-menu-item" href="{% url "checkout" %}">Paiement</a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown parent-menu-item">
+                        <a class="nav-link menu-item dropdown-toggle" data-bs-toggle="dropdown"
+                            href="javascript:void(0)" role="button" aria-expanded="false">Portfolio</a>
+                        <ul class="dropdown-menu border-0">
+                            <li class="nav-item">
+                                <a class="nav-link sub-menu-item" href="{% url "work" %}">Work</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link sub-menu-item" href="{% url "work-detail" %}">Work Detail</a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link sub-menu-item" href="{% url "contact" %}">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- END NAVBAR -->
+
+
+    <!-- Start Title -->
+    {% comment %} <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="page-title">
+                        <h2 class="text-dark fw-light lh-base mt-5">Launching Spring <span
+                                class="fw-medium title">Summer'21</span></h2>
+                        <p class="fs-16 text-muted mb-0">Aenean sollicitudin, lorem quis bibendum auctor, nisi elit
+                            consequat ipsum, nec sagittis sem nibh id elit. Proin gravida nibh vel velit auctor Aenean
+                            sollicitudin, adipisicing elit sed lorem quis bibendum auctor.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end container -->
+    </section> {% endcomment %}
+    <!-- End Title -->
+
+
+    <section class="sm-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="border-bottom">
+                        <div class="row align-items-center pb-sm-3 pb-4">
+                            <div class="col-lg-8 col-md-6 my-md-0 my-2">
+                                <p class="text-muted mb-0 py-sm-0 py-2">Showing 1–9 of 15 results</p>
+                            </div>
+                            <div class="col-lg-4 col-md-6 my-md-0 my-2">
+                                <form>
+                                    <div class="row mb-0 mt-md-4 mt-lg-0">
+                                        <h5 class="col-sm-3 col-form-label">Tri par :</h5>
+                                        <div class="col-sm-9 ps-0">
+                                            <select
+                                                class="form-select bg-light text-muted border fs-14 py-2 ms-sm-0 ms-1"
+                                                aria-label="Default select example">
+                                                <option selected>Plus populaire </option>
+                                                <option value="1">un</option>
+                                                <option value="2">Deux</option>
+                                                <option value="3">Trois</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END ROW -->
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="sidebar shadow rounded-3 py-4 mt-4">
+                        <div class="mb-4 ms-4">
+                            <a href="{% url "products" %}"><i data-feather="grid" class="text-muted me-2"></i></a>
+                            <a href="{% url "product-list" %}"><i data-feather="list" class="text-primary"></i></a>
+                        </div>
+                        <!-- categories -->
+                        <div>
+                            <div class="p-3 bg-light">
+                                <h6 class="mb-0">Categories</h6>
+                            </div>
+                            <div class="ms-3 my-3">
+                                <form method="get" action="">
+                                    {% for categorie in list_categorie %}
+                                    <div class="form-check mb-2">
+                                        <input 
+                                            class="form-check-input fs-16" 
+                                            type="radio" 
+                                            name="categorie" 
+                                            value="{{ categorie.id }}" 
+                                            id="categorie{{ categorie.id }}"
+                                            {% if request.GET.categorie|default:'' == categorie.id|stringformat:"s" %}checked{% endif %}
+                                            onchange="this.form.submit()" 
+                                        />
+                                        <label class="form-check-label text-dark ms-2" for="categorie{{ categorie.id }}">
+                                            {{ categorie.name_categorie }}
+                                        </label>
+                                    </div>
+                                    {% endfor %}
+                                </form>
+                            </div>
+                        </div>
+                        <!-- end categories -->
+
+                        <!-- color -->
+                        <div class="mt-4">
+                            <div class="p-3 bg-light">
+                                <h6 class="mb-0">Choisir une couleur</h6>
+                            </div>
+                            <div class="ms-3 my-3">
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input fs-16" type="checkbox" value=""
+                                        id="flexCheckDefaulta2" />
+                                    <label class="form-check-label text-dark" for="flexCheckDefaulta2"><i
+                                            class="mdi mdi-circle ms-2 fs-16"></i> Rouge</label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input fs-16" type="checkbox" value=""
+                                        id="flexCheckChecked55" checked />
+                                    <label class="form-check-label text-dark" for="flexCheckChecked55"><i
+                                            class="mdi mdi-circle text-primary ms-2 fs-16"></i> Bleu</label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input fs-16" type="checkbox" value=""
+                                        id="flexCheckChecked66" />
+                                    <label class="form-check-label text-dark" for="flexCheckChecked66"><i
+                                            class="mdi mdi-circle text-dark ms-2 fs-16"></i> Noir</label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input fs-16" type="checkbox" value=""
+                                        id="flexCheckChecked77" />
+                                    <label class="form-check-label text-dark" for="flexCheckChecked77"><i
+                                            class="mdi mdi-circle text-info ms-2 fs-16"></i> Cyan</label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input fs-16" type="checkbox" value=""
+                                        id="flexCheckChecked88" />
+                                    <label class="form-check-label text-dark" for="flexCheckChecked88"><i
+                                            class="mdi mdi-circle text-warning ms-2 fs-16"></i> Jaune</label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input fs-16" type="checkbox" value=""
+                                        id="flexCheckChecked99" />
+                                    <label class="form-check-label text-dark" for="flexCheckChecked99"><i
+                                            class="mdi mdi-circle text-success ms-2 fs-16"></i>Vert</label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end color -->
+
+                        <!-- items -->
+                        <div class="mt-4">
+                            <div class="p-3 bg-light">
+                                <h6 class="mb-0">Items</h6>
+                            </div>
+                            <div class="ms-3 my-3">
+                                <p class="d-inline-block text-dark fs-16">Select Items</p>
+                                <select class="form-select d-inline-block border w-50 ms-5 ms-md-2"
+                                    id="autoSizingSelect">
+                                    <option value="1" selected>1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- end item -->
+
+                        <!-- start price -->
+                        <div class="mt-4">
+                            <div class="p-3 bg-light mb-3">
+                                <h6 class="mb-0">Prix</h6>
+                            </div>
+                            <div class="ms-3 my-3">
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input fs-16" type="checkbox" value=""
+                                        id="flexCheckDefaulta7" />
+                                    <label class="form-check-label text-dark ms-2" for="flexCheckDefaulta7">$50 -
+                                        $99</label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input fs-16" type="checkbox" value="" id="flexCheckChecke"
+                                        checked />
+                                    <label class="form-check-label text-dark ms-2" for="flexCheckChecke">$100 -
+                                        $199</label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input fs-16" type="checkbox" value=""
+                                        id="flexCheckCheck" />
+                                    <label class="form-check-label text-dark ms-2" for="flexCheckCheck">$200 -
+                                        $299</label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input fs-16" type="checkbox" value="" id="flexCheckChec" />
+                                    <label class="form-check-label text-dark ms-2" for="flexCheckChec">$300 -
+                                        $399</label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input fs-16" type="checkbox" value="" id="flexCheckChe" />
+                                    <label class="form-check-label text-dark ms-2" for="flexCheckChe">$400 -
+                                        $499</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    {% for product in page_obj %}
+                    <div class="row align-items-center">
+                        <div class="col-md-5">
+                            <div class="product-item mt-4">
+                                <div class="product-list-img rounded-3 position-relative">
+                                    {% if product.image %}
+                                    <img class="img-fluid" src="{{ product.image.url }}" alt="{{ product.name_product }}" />
+                                    {% else %}
+                                    <img class="img-fluid" src="{% static 'images/products/pro-1.jpg' %}" alt="" />
+                                    {% endif %}
+                                    <span
+                                        class="text-dark badge bg-light rounded-3 fs-14 fw-bold position-absolute top-0 start-0 mt-2 ms-2 py-2">{{product.reduction_product}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end col -->
+                        <div class="col-md-7">
+                            <div class="pro-list-content my-3">
+                                <div class="price d-inline-block">
+                                    <ins class="pe-1 fs-16 fw-semibold text-decoration-none text-dark">${{product.price_product}}</ins>
+                                    <del class="text-muted fs-16">${{product.price_product}}</del>
+                                </div>
+                                <div class="rating d-inline-block ps-4">
+                                    <i class="mdi mdi-star fs-20 text-warning d-inline-block"></i>
+                                    <h5 class="d-inline-block fs-16">{{product.rate_product}}</h5>
+                                </div>
+
+                                <a href="{% url "product-detail" product.id_product %}">
+                                    <h6 class="fw-semibold lh-base fs-18 mt-3">{{product.name_product}}</h6>
+                                </a>
+                                <p class="text-muted my-3">
+                                    {{product.descrption_product}}
+                                </p>
+                                <div class="hover-content w-100 py-2">
+                                    <a href="{% url "cart" %}"><i
+                                            class="mdi mdi-cart-outline fs-22 me-3 pe-3 fw-bolder pro-icon border-end"></i></a>
+                                    <a href="{% url "product-detail" product.id_product %}"><i
+                                            class="mdi mdi-eye-outline fs-22 me-3 pe-3 fw-bolder pro-icon border-end active"></i></a>
+                                    <a href="{% url "cart" %}"><i
+                                            class="mdi mdi-heart-outline fs-22 fw-bolder pro-icon"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end col -->
+                    </div>{% endfor %}
+                    <!-- end row -->
+                    <!-- end row -->
+
+                    <!-- end row -->
+
+                    <div class="row">
+                        <div class="col-lg-12 mt-5">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-center">
+                    
+                                    {% if page_obj.has_previous %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item disabled">
+                                            <span class="page-link">&laquo;</span>
+                                        </li>
+                                    {% endif %}
+                    
+                                    {% for page_num in page_obj.paginator.page_range %}
+                                        {% if page_obj.number == page_num %}
+                                            <li class="page-item active">
+                                                <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                                            </li>
+                                        {% else %}
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+                    
+                                    {% if page_obj.has_next %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item disabled">
+                                            <span class="page-link">&raquo;</span>
+                                        </li>
+                                    {% endif %}
+                    
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+            <!-- END ROW -->
+        </div>
+    </section>
+
+    <!-- start brand-logo -->
+    <section class="client-section sm-section">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-md-auto col-12 mt-3 py-lg-0 py-3">
+                    <div class="client-box">
+                        <img src="{% static 'images/brand/brand-1.png' %}" class="mx-auto d-block img-fluid" alt="client-logo" />
+                    </div>
+                </div>
+                <div class="col-md-auto col-12 mt-3 py-lg-0 py-3">
+                    <div class="client-box">
+                        <img src="{% static 'images/brand/brand-2.png' %}" class="mx-auto d-block img-fluid" alt="client-logo" />
+                    </div>
+                </div>
+                <div class="col-md-auto col-12 mt-3 py-lg-0 py-3">
+                    <div class="client-box">
+                        <img src="{% static 'images/brand/brand-3.png' %}" class="mx-auto d-block img-fluid" alt="client-logo" />
+                    </div>
+                </div>
+                <div class="col-md-auto col-12 mt-3 py-lg-0 py-3">
+                    <div class="client-box">
+                        <img src="{% static 'images/brand/brand-4.png' %}" class="mx-auto d-block img-fluid" alt="client-logo" />
+                    </div>
+                </div>
+                <div class="col-md-auto col-12 mt-3 py-lg-0 py-3">
+                    <div class="client-box">
+                        <img src="{% static 'images/brand/brand-5.png' %}" class="mx-auto d-block img-fluid" alt="client-logo" />
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </section>
+    <!-- end brand-logo -->
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="text-center">
+                        <a href="{% url "index" %}" class="footer-logo d-inline-block py-4">
+                            <img src="{% static 'images/logo-light.png' %}" class="mx-auto logo-dark" alt="" height="24" />
+                        </a>
+
+                        <ul class="list-inline social-circle mt-3">
+                            <li class="list-inline-item"><a href="javascript:void(0)"> <i class="mdi mdi-facebook"></i>
+                                </a></li>
+                            <li class="list-inline-item"><a href="javascript:void(0)"> <i class="mdi mdi-twitter"></i>
+                                </a></li>
+                            <li class="list-inline-item"><a href="javascript:void(0)"> <i
+                                        class="mdi mdi-google-plus"></i> </a></li>
+                            <li class="list-inline-item"><a href="javascript:void(0)"> <i class="mdi mdi-apple"></i>
+                                </a></li>
+                            <li class="list-inline-item"><a href="javascript:void(0)"> <i class="mdi mdi-instagram"></i>
+                                </a></li>
+                        </ul>
+
+                        <div class="text-white-50 pb-4">
+                            <script>document.write(new Date().getFullYear())</script> &copy; Sozia by <a
+                                class="text-white-50 text-decoration-underline" target="_blank"
+                                href="https://themesdesign.in/">Themesdesign</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+        </div>
+    </footer>
+    <!-- END FOOTER -->
+
+    <!-- Style switcher -->
+    <div id="style-switcher" onclick="toggleSwitcher()">
+        <div>
+            <h3>Select Your Color</h3>
+            <ul class="pattern">
+                <li>
+                    <a class="color1" href="javascript: void(0);" onclick="setColor('default')"></a>
+                </li>
+                <li>
+                    <a class="color2" href="javascript: void(0);" onclick="setColor('success')"></a>
+                </li>
+                <li>
+                    <a class="color3" href="javascript: void(0);" onclick="setColor('warning')"></a>
+                </li>
+                <li>
+                    <a class="color4" href="javascript: void(0);" onclick="setColor('danger')"></a>
+                </li>
+                <li>
+                    <a class="color5" href="javascript: void(0);" onclick="setColor('info')"></a>
+                </li>
+                <li>
+                    <a class="color6" href="javascript: void(0);" onclick="setColor('amber')"></a>
+                </li>
+            </ul>
+        </div>
+        <div class="bottom">
+            <a href="javascript: void(0);" class="settings rounded-end text-light"><i data-feather="droplet"></i></a>
+        </div>
+    </div>
+    <!-- end Style switcher -->
+
+    <!-- Javascript -->
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- feather icon -->
+    <script src="{% static 'js/feather.js' %}"></script>
+
+    <!-- app js -->
+    <script src="{% static 'js/app.js' %}"></script>
+</body>
+
+
+<!-- Mirrored from themesdesign.in/sozia-django-flask/layouts/product-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 16 Feb 2025 12:59:50 GMT -->
+</html>

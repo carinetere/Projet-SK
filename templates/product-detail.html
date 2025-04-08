@@ -1,0 +1,606 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from themesdesign.in/sozia-django-flask/layouts/product-detail.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 16 Feb 2025 12:59:50 GMT -->
+<head>
+    <meta charset="UTF-8" />
+    <title>Sozia - Responsive Minimal Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Premium Bootstrap 5 Landing Page Template" />
+    <meta name="keywords" content="bootstrap 5, premium, marketing, multipurpose" />
+    <meta name="author" content="Themesdesign" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/materialdesignicons.min.css' %}" />
+    <!-- Pe 7 icon Css-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/pe-icon-7-stroke.css' %}" />
+
+    <!-- custom Css -->
+    <link rel="stylesheet" id="app-css" type="text/css" href="{% static 'css/style.css' %}" />
+
+    <link rel="stylesheet" href="{% static 'css/glightbox.min.css' %}" />
+
+    <!-- colors -->
+    <link href="{% static 'css/colors/default.css' %}" rel="stylesheet" type="text/css" id="color-opt" />
+</head>
+
+<body data-bs-target=".navbar" data-bs-offset="110">
+    <!-- light-dark mode button -->
+    <a href="javascript: void(0);" id="mode" data-class="light" class="text-white rounded-end mode-btn"
+        onclick="changeMode(event)">
+        <i class="mode-dark mx-auto" data-feather="moon"></i>
+        <i class="bx-spin mode-light" data-feather="sun"></i>
+    </a>
+    <!-- Start Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top sticky mx-auto" id="navbar">
+        <div class="container">
+            <a href="{% url "index" %}" class="navbar-brand me-4">
+                <img src="{% static 'images/logo-light.png' %}" class="logo-light" alt="" height="22" />
+                <img src="{% static 'images/logo-dark.png' %}" class="logo-dark" alt="" height="22" />
+            </a>
+
+            <div class="navbar-header">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbar-collapse-1" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="mdi mdi-menu"></span>
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                <ul class="nav navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link sub-menu-item" href="{% url "index" %}">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link sub-menu-item" href="{% url "about" %}">A propos</a></li>
+                    <li class="nav-item"><a class="nav-link sub-menu-item" href="{% url "services" %}">Services</a></li>
+                    <li class="nav-item dropdown parent-menu-item">
+                        <a class="nav-link menu-item dropdown-toggle" data-bs-toggle="dropdown"
+                            href="javascript:void(0)" role="button" aria-expanded="false">Boutique</a>
+                        <ul class="dropdown-menu border-0">
+                            <li class="nav-item">
+                                <a class="nav-link sub-menu-item" href="{% url "products" %}">Produits</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link sub-menu-item" href="{% url "product-list" %}">Liste de produits</a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link sub-menu-item" href="{% url "cart" %}">Panier</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link sub-menu-item" href="{% url "checkout" %}">Paiement</a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown parent-menu-item">
+                        <a class="nav-link menu-item dropdown-toggle" data-bs-toggle="dropdown"
+                            href="javascript:void(0)" role="button" aria-expanded="false">Portfolio</a>
+                        <ul class="dropdown-menu border-0">
+                            <li class="nav-item">
+                                <a class="nav-link sub-menu-item" href="{% url "work" %}">Work</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link sub-menu-item" href="{% url "work-detail" %}">Work Detail</a>
+                            </li>
+                        </ul>
+                    </li>
+                   
+                    <li class="nav-item">
+                        <a class="nav-link sub-menu-item" href="{% url "contact" %}">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- END NAVBAR -->
+
+
+    <!-- Start Title -->
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="page-title">
+                        <h2 class="text-dark fw-light lh-base mt-5">{{product.name_product}} <span
+                                class="fw-medium title">{{product.categorie_product.name_categorie}}</span></h2>
+                        <p class="fs-16 text-muted mb-0">{{product.descrption_product}}</p>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </section>
+    <!-- End Title -->
+
+    <section class="sm-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-md-5 mt-4">
+                            <div class="position-relative">
+                                <div class="item-box">
+                                    <a class="image-popup item-img-wrap" href="{% static 'images/products/pro-1.jpg' %}">
+                                        <img class="item-container img-fluid rounded" src="{{product.image.url}}"
+                                            alt="1">
+                                    </a>
+                                </div>
+                                <!-- <img class="img-fluid rounded-3" src="images/products/pro-1.jpg" alt="" /> -->
+                                <span
+                                    class="text-dark badge bg-light rounded-3 fs-14 fw-bold position-absolute top-0 start-0 mt-2 ms-2 py-2">-18%</span>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4 mt-4">
+                                    <div class="item-box">
+                                        <a class="image-popup item-img-wrap" href="{% static 'images/products/pro-5.jpg' %}">
+                                            <img class="item-container img-fluid rounded"
+                                                src="{{product.image.url}}" alt="1">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 mt-4">
+                                    <div class="item-box">
+                                        <a class="image-popup item-img-wrap" href="{% static 'images/products/pro-3.jpg' %}">
+                                            <img class="item-container img-fluid rounded"
+                                                src="{{product.image.url}}" alt="1">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 mt-4">
+                                    <div class="item-box">
+                                        <a class="image-popup item-img-wrap" href="{% static 'images/products/pro-4.jpg' %}">
+                                            <img class="item-container img-fluid rounded"
+                                                src="{{product.image.url}}" alt="1">
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-7 mt-4">
+                            <div class="pro-detail-content">
+                                <div class="price my-3">
+                                    <ins class="pe-2 fs-18 text-success fw-semibold text-decoration-none">{{product.price_product}} FCFA</ins>
+                                    <del class="text-muted fs-18">{{product.price_product}} FCFA</del>
+                                </div>
+
+                                <p class="text-muted fs-16 my-3">
+                                    {{product.descrption_product}}
+                                </p>
+                                <div class="rating my-3">
+                                    {% for i in "12345" %}
+                                        {% if forloop.counter <= avg_rating %}
+                                            <i class="mdi mdi-star fs-20 text-warning d-inline-block"></i>
+                                        {% else %}
+                                            <i class="mdi mdi-star-outline fs-20 text-muted d-inline-block"></i>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <h5 class="d-inline-block fs-16 mb-0 ms-2">{{ avg_rating|floatformat:1 }} / 5</h5> <!-- Affichage de la note moyenne avec un chiffre après la virgule -->
+                                </div>                                                            
+
+                                <div class="details mb-4">
+                                    <ul class="list-unstyled">
+                                        <li class="text-muted py-1"><i data-feather="arrow-right"
+                                                class="icon-xxs me-2"></i> Generally delivered in 7 - 11 days</li>
+                                        <li class="text-muted py-1"><i data-feather="arrow-right"
+                                                class="icon-xxs me-2"></i> Warranty Period (in years):1</li>
+                                        <li class="text-muted py-1"><i data-feather="arrow-right"
+                                                class="icon-xxs me-2"></i> Number of Focus Points:3</li>
+                                        <li class="text-muted py-1"><i data-feather="arrow-right"
+                                                class="icon-xxs me-2"></i> 7 Days Replacement</li>
+                                    </ul>
+                                    <ul class="list-unstyled list-inline"></ul>
+                                </div>
+                                <form method="POST" action="{% url 'add_to_cart' product.id_product %}">
+                                    {% csrf_token %}
+                                    <div class="qty mb-4 d-flex align-items-center">
+                                        <h6 class="fw-semibold me-3 mb-0">Sélectionner une quantité :</h6>
+                                        <div class="input-group w-auto">
+                                            <button class="btn btn-outline-secondary" type="button" onclick="decrementQty()">−</button>
+                                            <input type="text" class="form-control text-center" value="1" id="itemQty" name="quantity" style="width: 60px;">
+                                            <button class="btn btn-outline-secondary" type="button" onclick="incrementQty()">+</button>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary me-2 my-2" type="submit">Ajouter au panier</button>
+                                </form>
+    
+                                <div class="details mb-4">
+                                    <ul class="list-unstyled">
+                                        <li class="text-muted py-1"><i data-feather="arrow-right" class="icon-xxs me-2"></i> Livraison généralement entre 7 et 11 jours</li>
+                                        <li class="text-muted py-1"><i data-feather="arrow-right" class="icon-xxs me-2"></i> Garantie (en années) : 1</li>
+                                        <li class="text-muted py-1"><i data-feather="arrow-right" class="icon-xxs me-2"></i> Nombre de points de focus : 3</li>
+                                        <li class="text-muted py-1"><i data-feather="arrow-right" class="icon-xxs me-2"></i> Remplacement sous 7 jours</li>
+                                    </ul>
+                                </div>    
+                                </div>
+                                <div class="color mb-4">
+                                    <h6 class="d-inline-block fw-semibold">Couleur :</h6>
+                                    <ul class="d-inline-block list-unstyled list-inline align-middle ms-3 mb-0">
+                                        <li class="list-inline-item me-0">
+                                            <a href="javascript:void(0)"><i
+                                                    class="mdi mdi-invert-colors fs-5 text-success"></i></a>
+                                        </li>
+                                        <li class="list-inline-item me-0">
+                                            <a href="javascript:void(0)"><i
+                                                    class="mdi mdi-invert-colors fs-5 text-primary"></i></a>
+                                        </li>
+                                        <li class="list-inline-item me-0">
+                                            <a href="javascript:void(0)"><i
+                                                    class="mdi mdi-invert-colors fs-5 text-danger"></i></a>
+                                        </li>
+                                        <li class="list-inline-item me-0">
+                                            <a href="javascript:void(0)"><i
+                                                    class="mdi mdi-invert-colors fs-5 text-warning"></i></a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="javascript:void(0)"><i
+                                                    class="mdi mdi-invert-colors fs-5 text-dark"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="availability d-flex mb-4">
+                                    <h6 class="fw-semibold">Disponibilité :</h6>
+                                    <p class="text-muted fs-15 ms-4">{{product.state_product}}</p>
+                                </div>
+                                <div class="hover-content">
+                                    <a href="{% url "cart" %}" class="btn btn-primary me-2 my-2"> <i
+                                            data-feather="shopping-cart" class="icon-xs me-2"></i> Ajouter au pannier</a>
+                                    <a href="{% url "cart" %}" class="btn btn-secondary my-2"> <i data-feather="heart"
+                                            class="icon-xs me-2"></i> Liste de souhaits</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end pro-detail -->
+
+    <!-- detail tab -->
+    <section class="section bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <nav class="pro-detail-area">
+                        <div class="nav nav-tabs border-bottom detail-title" id="nav-tab" role="tablist">
+                            <a class="nav-link border-0 active" id="nav-home-tab" data-bs-toggle="tab" href="#nav-home"
+                                role="tab" aria-controls="nav-home" aria-selected="true">Description</a>
+                            <a class="nav-link border-0" id="nav-profile-tab" data-bs-toggle="tab" href="#nav-profile"
+                                role="tab" aria-controls="nav-profile" aria-selected="false">Avis</a>
+                        </div>
+                    </nav>
+                    <div class="tab-content py-4" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+                            aria-labelledby="nav-home-tab">
+                            <p class="text-muted fs-16">
+                                Évasion au cœur de la nature, ce tableau de paysage capture la beauté sereine d’un horizon lointain.
+                                 Entre cieux aux teintes douces et vallées baignées de lumière, chaque coup de pinceau invite à la contemplation. 
+                                 Les couleurs harmonieuses et les jeux d’ombre et de lumière insufflent une atmosphère apaisante, évoquant un moment suspendu dans le temps. 
+                                 Une véritable fenêtre ouverte sur l’infini, où la nature se dévoile dans toute sa splendeur. <br />
+                                
+                            </p>
+
+                            {% comment %} <div class="row text-muted">
+                                <div class="col-md-6">
+                                    <ul class="list-unstyled">
+                                        <li class="py-1"><i class="mdi mdi-circle-medium text-primary"></i> Claritas est
+                                            etiam processus dynamicus.</li>
+                                        <li class="py-1"><i class="mdi mdi-circle-medium text-primary"></i> Mirum est
+                                            notare quam littera.</li>
+                                        <li class="py-1"><i class="mdi mdi-circle-medium text-primary"></i> Nam liber
+                                            tempor cum soluta nobis eleifend.</li>
+                                        <li class="py-1"><i class="mdi mdi-circle-medium text-primary"></i> Duis autem
+                                            vel eum iriure dolor.</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <ul class="list-unstyled">
+                                        <li class="py-1"><i class="mdi mdi-circle-medium text-primary"></i> Claritas est
+                                            etiam processus dynamicus.</li>
+                                        <li class="py-1"><i class="mdi mdi-circle-medium text-primary"></i> Mirum est
+                                            notare quam littera.</li>
+                                        <li class="py-1"><i class="mdi mdi-circle-medium text-primary"></i> Nam liber
+                                            tempor cum soluta nobis eleifend.</li>
+                                        <li class="py-1"><i class="mdi mdi-circle-medium text-primary"></i> Duis autem
+                                            vel eum iriure dolor.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div> {% endcomment %}
+
+                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                            <h6 class="lh-base fw-medium">
+                                {{ list_avis.count }} avis
+                            </h6>
+                            <ul class="list-unstyled my-4">
+                                {% for review in list_avis %}
+                                <li class="list-inline d-flex py-3">
+                                    <div>
+                                        <a href="javascript:void(0)">
+                                            <img class="rounded-circle img-thumbnail" src="{% static 'images/clients/client-1.jpg' %}" alt="" />
+                                        </a>
+                                    </div>
+                                    <div class="ps-4">
+                                        <h6 class="d-inline-block fs-16 mb-0">{{ review.fullname_review }}</h6>
+                                        <div class="rating d-inline-block ps-sm-4">
+                                            {% for i in "12345" %}
+                                                {% if forloop.counter <= review.rate_review %}
+                                                    <i class="mdi mdi-star fs-16 text-warning d-inline-block"></i>
+                                                {% else %}
+                                                    <i class="mdi mdi-star-outline fs-16 text-warning d-inline-block"></i>
+                                                {% endif %}
+                                            {% endfor %}
+                                            <h5 class="d-inline-block fs-16">{{ review.rate_review }}.0</h5>
+                                        </div>
+                        
+                                        <p class="text-muted">{{ review.created_at|date:"j F Y" }}</p>
+                        
+                                        <p class="text-muted fs-16">
+                                            {{ review.message_review }}
+                                        </p>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        
+                    </div>
+                    <!-- end nav -->
+                    <div>
+                        <h6 class="lh-base fw-semibold mt-4 mb-3">Ajouter un avis</h6>
+                        <form method="post" action='{% url "add_review" product.id_product %}'>
+                            {% csrf_token %}
+                            <div class="row g-4 mb-2">
+                                <div class="col-lg-6">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" id='fullname' name='fullname' class="form-control" placeholder="Your name" />
+                                        <label class="text-muted">Votre nom</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-floating mb-3">
+                                        <input type="email" id='email' name='email' class="form-control" placeholder="Your email" />
+                                        <label class="text-muted">Adresse e-mail</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-4 mb-2">
+                                <div class="col-lg-12">
+                                    <div class="form-floating mb-3">
+                                        <textarea class="form-control"  id= 'message' name='message' placeholder="Your Message...."
+                                            style="height: 100px;"></textarea>
+                                        <label class="text-muted">Votre Avis</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <ul class="list-unstyled list-inline mb-0" id="star-rating">
+                                        <li class="fw-semibold text-muted list-inline-item lh-lg me-2">Ajouter un avis :</li>
+                                        {% for i in "12345" %}
+                                        <li class="list-inline-item me-0">
+                                            <i class="mdi mdi-star fs-17 text-secondary star" data-value="{{ forloop.counter }}"></i>
+                                        </li>
+                                        {% endfor %}
+                                        <li class="list-inline-item ms-2">
+                                            <span id="star-count" class="fw-bold text-primary">0 / 5</span>
+                                        </li>
+                                    </ul>
+                                    <input type="hidden" name="rate" id="rating-value" value="0">
+                                </div>
+                            </div>                                                        
+                            <div class="row">
+                                <div class="col-lg-12 mt-3">
+                                    <button class="btn btn-primary" type="submit">PUBLIER <i class="icon-xs"
+                                            data-feather="arrow-right"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+        </div>
+    </section>
+    <!-- end detail tab -->
+
+    <!-- start brand-logo -->
+    {% comment %} <section class="client-section section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h4 class="fw-semibold border-bottom d-inline-block text-dark pb-3">Trusted by Thousands</h4>
+                </div>
+            </div>
+            <div class="row justify-content-between">
+                <div class="col-md-auto col-12 mt-3 py-lg-0 py-3">
+                    <div class="client-box">
+                        <img src="{% static 'images/brand/brand-1.png' %}" class="mx-auto d-block img-fluid" alt="client-logo" />
+                    </div>
+                </div>
+                <div class="col-md-auto col-12 mt-3 py-lg-0 py-3">
+                    <div class="client-box">
+                        <img src="{% static 'images/brand/brand-2.png' %}" class="mx-auto d-block img-fluid" alt="client-logo" />
+                    </div>
+                </div>
+                <div class="col-md-auto col-12 mt-3 py-lg-0 py-3">
+                    <div class="client-box">
+                        <img src="{% static 'images/brand/brand-3.png' %}" class="mx-auto d-block img-fluid" alt="client-logo" />
+                    </div>
+                </div>
+                <div class="col-md-auto col-12 mt-3 py-lg-0 py-3">
+                    <div class="client-box">
+                        <img src="{% static 'images/brand/brand-4.png' %}" class="mx-auto d-block img-fluid" alt="client-logo" />
+                    </div>
+                </div>
+                <div class="col-md-auto col-12 mt-3 py-lg-0 py-3">
+                    <div class="client-box">
+                        <img src="{% static 'images/brand/brand-5.png' %}" class="mx-auto d-block img-fluid" alt="client-logo" />
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </section> {% endcomment %}
+    <!-- end brand-logo -->
+
+    <!-- FOOTER -->
+    <footer class="footer mt-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="text-center">
+                        <a href="{% url "index" %}" class="footer-logo d-inline-block py-4">
+                            <img src="{% static 'images/logo-light.png' %}" class="mx-auto logo-dark" alt="" height="24" />
+                        </a>
+
+                        <ul class="list-inline social-circle mt-3">
+                            <li class="list-inline-item"><a href="javascript:void(0)"> <i class="mdi mdi-facebook"></i>
+                                </a></li>
+                            <li class="list-inline-item"><a href="javascript:void(0)"> <i class="mdi mdi-twitter"></i>
+                                </a></li>
+                            <li class="list-inline-item"><a href="javascript:void(0)"> <i
+                                        class="mdi mdi-google-plus"></i> </a></li>
+                            <li class="list-inline-item"><a href="javascript:void(0)"> <i class="mdi mdi-apple"></i>
+                                </a></li>
+                            <li class="list-inline-item"><a href="javascript:void(0)"> <i class="mdi mdi-instagram"></i>
+                                </a></li>
+                        </ul>
+
+                        <div class="text-white-50 pb-4">
+                            <script>document.write(new Date().getFullYear())</script> &copy; Sozia by <a
+                                class="text-white-50 text-decoration-underline" target="_blank"
+                                href="https://themesdesign.in/">Themesdesign</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+        </div>
+    </footer>
+    <!-- END FOOTER -->
+
+    <!-- Style switcher -->
+    <div id="style-switcher" onclick="toggleSwitcher()">
+        <div>
+            <h3>Select Your Color</h3>
+            <ul class="pattern">
+                <li>
+                    <a class="color1" href="javascript: void(0);" onclick="setColor('default')"></a>
+                </li>
+                <li>
+                    <a class="color2" href="javascript: void(0);" onclick="setColor('success')"></a>
+                </li>
+                <li>
+                    <a class="color3" href="javascript: void(0);" onclick="setColor('warning')"></a>
+                </li>
+                <li>
+                    <a class="color4" href="javascript: void(0);" onclick="setColor('danger')"></a>
+                </li>
+                <li>
+                    <a class="color5" href="javascript: void(0);" onclick="setColor('info')"></a>
+                </li>
+                <li>
+                    <a class="color6" href="javascript: void(0);" onclick="setColor('amber')"></a>
+                </li>
+            </ul>
+        </div>
+        <div class="bottom">
+            <a href="javascript: void(0);" class="settings rounded-end text-light"><i data-feather="droplet"></i></a>
+        </div>
+    </div>
+    <!-- end Style switcher -->
+
+    <!-- Javascript -->
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+    <script src="{% static 'js/glightbox.min.js' %}"></script>
+
+    <!-- feather icon -->
+    <script src="{% static 'js/feather.js' %}"></script>
+
+    <!-- product-detail img view js -->
+    <script src="{% static 'js/product-detail.js' %}"></script>
+
+    <!-- app js -->
+    <script src="{% static 'js/app.js' %}"></script>
+
+    <script>
+        let qty = 1;
+    
+        function updateQtyDisplay() {
+            document.getElementById("itemQty").value = qty;
+        }
+    
+        function incrementQty() {
+            qty++;
+            updateQtyDisplay();
+        }
+    
+        function decrementQty() {
+            if (qty > 1) {
+                qty--;
+                updateQtyDisplay();
+            }
+        }
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const stars = document.querySelectorAll(".star");
+            const ratingValue = document.getElementById("rating-value");
+            const starCount = document.getElementById("star-count");
+    
+            stars.forEach(star => {
+                star.addEventListener("click", function () {
+                    const value = parseInt(this.getAttribute("data-value"));
+                    ratingValue.value = value;
+                    starCount.textContent = `${value} / 5`;
+    
+                    // Met à jour la couleur des étoiles
+                    stars.forEach(s => {
+                        const starValue = parseInt(s.getAttribute("data-value"));
+                        if (starValue <= value) {
+                            s.classList.remove("text-secondary");
+                            s.classList.add("text-warning");
+                        } else {
+                            s.classList.remove("text-warning");
+                            s.classList.add("text-secondary");
+                        }
+                    });
+                });
+            });
+        });
+    </script>    
+
+    <script>
+        function incrementQty() {
+            let qty = document.getElementById('itemQty');
+            qty.value = parseInt(qty.value) + 1;
+        }
+    
+        function decrementQty() {
+            let qty = document.getElementById('itemQty');
+            if (qty.value > 1) {
+                qty.value = parseInt(qty.value) - 1;
+            }
+        }
+    </script>
+    
+    
+    
+</body>
+
+
+<!-- Mirrored from themesdesign.in/sozia-django-flask/layouts/product-detail.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 16 Feb 2025 12:59:52 GMT -->
+</html>

@@ -1,0 +1,68 @@
+# Django stuff:
+*.log
+*.pot
+*.pyc
+*.pyo
+__pycache__/
+db.sqlite3
+media/
+staticfiles/
+*.sqlite3
+
+# Environment variables
+.env
+
+# VSCode
+.vscode/
+
+# PyCharm
+.idea/
+
+# Local virtual environment
+venv/
+env/
+.venv/
+.env/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+
+# Python
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+*.log
+*.pot
+*.mo
+__pycache__/
+
+# Sphinx documentation
+docs/_build/
+
+# Test results
+coverage/
+*.cover
+*.py,cover
+
+# Django migrations
+migrations/
+
+# IDE files
+*.iml
+
+# JetBrains IDE
+.idea/
+
+# Flask
+instance/
+.webassets-cache
+
+# Local development environment
+local_settings.py
+settings_local.py

@@ -1,0 +1,271 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Mon Profil | MyArt{% endblock %}
+
+{% block content %}
+<div class="profile-container container my-5">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="profile-sidebar bg-light p-4 rounded">
+                <div class="profile-image text-center mb-4">
+                    {% if user.profile.avatar %}
+                        <img src="{{ user.profile.avatar.url }}" alt="Photo de profil" class="rounded-circle img-fluid" style="max-width: 150px;">
+                    {% else %}
+                        <img src="{% static 'images/default-avatar.png' %}" alt="Photo de profil par défaut" class="rounded-circle img-fluid" style="max-width: 150px;">
+                    {% endif %}
+                </div>
+                
+                <h3 class="text-center">{{ user.first_name }} {{ user.last_name }}</h3>
+                <p class="text-center text-muted">Membre depuis {{ user.date_joined|date:"d F Y" }}</p>
+                
+                <div class="profile-stats d-flex justify-content-around my-4">
+                    <div class="text-center">
+                        <h5>{{ user.orders.count }}</h5>
+                        <small>Achats</small>
+                    </div>
+                    <div class="text-center">
+                        <h5>{{ user.favorites.count }}</h5>
+                        <small>Favoris</small>
+                    </div>
+                    <div class="text-center">
+                        <h5>{{ user.reviews.count }}</h5>
+                        <small>Avis</small>
+                    </div>
+                </div>
+                
+                <div class="profile-actions my-4">
+                    <a href="{% url 'profile_edit' %}" class="btn btn-outline-primary btn-block mb-2">Modifier mon profil</a>
+                    <a href="{% url 'favorites' %}" class="btn btn-primary btn-block">Mes favoris</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-8">
+            <ul class="nav nav-tabs mb-4" id="profileTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="orders-tab" data-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="true">Mes achats</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="favorites-tab" data-toggle="tab" href="#favorites" role="tab" aria-controls="favorites" aria-selected="false">Mes favoris</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Mes avis</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="false">Mes informations</a>
+                </li>
+            </ul>
+            
+            <div class="tab-content" id="profileTabContent">
+                <!-- Tab Mes achats -->
+                <div class="tab-pane fade show active" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+                    {% if user.orders.exists %}
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>N° Commande</th>
+                                        <th>Date</th>
+                                        <th>Montant</th>
+                                        <th>Statut</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for order in user.orders.all %}
+                                    <tr>
+                                        <td>#{{ order.order_number }}</td>
+                                        <td>{{ order.created_at|date:"d/m/Y" }}</td>
+                                        <td>{{ order.total_amount }} €</td>
+                                        <td>
+                                            {% if order.status == 'completed' %}
+                                                <span class="badge badge-success">Terminée</span>
+                                            {% elif order.status == 'pending' %}
+                                                <span class="badge badge-warning">En attente</span>
+                                            {% elif order.status == 'shipped' %}
+                                                <span class="badge badge-info">Expédiée</span>
+                                            {% else %}
+                                                <span class="badge badge-secondary">{{ order.status }}</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <a href="{% url 'order_detail' order.id %}" class="btn btn-sm btn-outline-primary">Détails</a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="text-center py-5">
+                            <img src="{% static 'images/empty-orders.svg' %}" alt="Aucun achat" style="max-width: 200px;" class="mb-3">
+                            <h4>Vous n'avez pas encore effectué d'achat</h4>
+                            <p class="text-muted">Découvrez notre sélection d'œuvres et commencez votre collection dès maintenant</p>
+                            <a href="{% url 'shop' %}" class="btn btn-primary mt-2">Explorer la boutique</a>
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Tab Favoris -->
+                <div class="tab-pane fade" id="favorites" role="tabpanel" aria-labelledby="favorites-tab">
+                    {% if user.favorites.exists %}
+                        <div class="row">
+                            {% for favorite in user.favorites.all %}
+                                <div class="col-md-6 col-lg-4 mb-4">
+                                    <div class="card artwork-card h-100">
+                                        <img src="{{ favorite.artwork.image.url }}" class="card-img-top" alt="{{ favorite.artwork.title }}">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ favorite.artwork.title }}</h5>
+                                            <p class="card-text text-muted">{{ favorite.artwork.category.name }}</p>
+                                            <p class="card-text font-weight-bold">{{ favorite.artwork.price }} €</p>
+                                        </div>
+                                        <div class="card-footer bg-white border-top-0">
+                                            <a href="{% url 'artwork_detail' favorite.artwork.id %}" class="btn btn-sm btn-outline-primary">Voir détails</a>
+                                            <a href="{% url 'toggle_favorite' favorite.artwork.id %}" class="btn btn-sm btn-outline-danger ml-2">Retirer</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="text-center py-5">
+                            <img src="{% static 'images/empty-favorites.svg' %}" alt="Aucun favori" style="max-width: 200px;" class="mb-3">
+                            <h4>Vous n'avez pas encore de favoris</h4>
+                            <p class="text-muted">Ajoutez des œuvres à vos favoris pour les retrouver facilement</p>
+                            <a href="{% url 'shop' %}" class="btn btn-primary mt-2">Explorer la boutique</a>
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Tab Avis -->
+                <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+                    {% if user.reviews.exists %}
+                        <div class="reviews-list">
+                            {% for review in user.reviews.all %}
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <img src="{{ review.artwork.image.url }}" alt="{{ review.artwork.title }}" class="mr-3" style="width: 80px; height: 80px; object-fit: cover;">
+                                            <div>
+                                                <h5 class="card-title mb-1">{{ review.artwork.title }}</h5>
+                                                <div class="text-warning">
+                                                    {% for i in "12345" %}
+                                                        {% if forloop.counter <= review.rating %}
+                                                            <i class="fas fa-star"></i>
+                                                        {% else %}
+                                                            <i class="far fa-star"></i>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </div>
+                                                <small class="text-muted">Publié le {{ review.created_at|date:"d/m/Y" }}</small>
+                                            </div>
+                                        </div>
+                                        <p class="card-text">{{ review.comment }}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="text-center py-5">
+                            <img src="{% static 'images/empty-reviews.svg' %}" alt="Aucun avis" style="max-width: 200px;" class="mb-3">
+                            <h4>Vous n'avez pas encore laissé d'avis</h4>
+                            <p class="text-muted">Partagez votre opinion sur les œuvres que vous avez achetées</p>
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Tab Informations -->
+                <div class="tab-pane fade" id="info" role="tabpanel" aria-labelledby="info-tab">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h4 class="card-title">Informations personnelles</h4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><strong>Nom :</strong> {{ user.last_name }}</p>
+                                    <p><strong>Prénom :</strong> {{ user.first_name }}</p>
+                                    <p><strong>Email :</strong> {{ user.email }}</p>
+                                    <p><strong>Téléphone :</strong> {{ user.profile.phone|default:"Non renseigné" }}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><strong>Membre depuis :</strong> {{ user.date_joined|date:"d F Y" }}</p>
+                                    <p><strong>Dernière connexion :</strong> {{ user.last_login|date:"d F Y à H:i" }}</p>
+                                    <p><strong>Langue préférée :</strong> {{ user.profile.preferred_language|default:"Français" }}</p>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <a href="{% url 'profile_edit' %}" class="btn btn-sm btn-primary">Modifier mes informations</a>
+                                <a href="{% url 'password_change' %}" class="btn btn-sm btn-outline-secondary ml-2">Changer de mot de passe</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h4 class="card-title">Adresses</h4>
+                            <div class="row">
+                                {% if user.addresses.exists %}
+                                    {% for address in user.addresses.all %}
+                                        <div class="col-md-6 mb-3">
+                                            <div class="border rounded p-3">
+                                                <h5 class="mb-2">
+                                                    {{ address.name }}
+                                                    {% if address.is_default %}
+                                                        <span class="badge badge-primary ml-2">Par défaut</span>
+                                                    {% endif %}
+                                                </h5>
+                                                <p class="mb-1">{{ address.street }}</p>
+                                                <p class="mb-1">{{ address.postal_code }} {{ address.city }}</p>
+                                                <p class="mb-2">{{ address.country }}</p>
+                                                <div>
+                                                    <a href="{% url 'address_edit' address.id %}" class="btn btn-sm btn-outline-primary">Modifier</a>
+                                                    <a href="{% url 'address_delete' address.id %}" class="btn btn-sm btn-outline-danger ml-2">Supprimer</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="col-12">
+                                        <p class="text-muted">Aucune adresse enregistrée</p>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="mt-3">
+                                <a href="{% url 'address_create' %}" class="btn btn-sm btn-primary">Ajouter une adresse</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Préférences</h4>
+                            <form method="post" action="{% url 'update_preferences' %}">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="newsletter" name="newsletter" {% if user.profile.newsletter %}checked{% endif %}>
+                                        <label class="custom-control-label" for="newsletter">Recevoir notre newsletter</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="promo_emails" name="promo_emails" {% if user.profile.promo_emails %}checked{% endif %}>
+                                        <label class="custom-control-label" for="promo_emails">Recevoir des emails promotionnels</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="order_updates" name="order_updates" {% if user.profile.order_updates %}checked{% endif %}>
+                                        <label class="custom-control-label" for="order_updates">Recevoir des notifications de commande</label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-sm btn-primary">Enregistrer</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
